@@ -1,4 +1,6 @@
 
 
-url = window.location.pathname
- document.querySelector('#counter').value = 'Konichiwa'
+let url = window.location.pathname
+let body = document.querySelector('#counter')
+
+console.log(body);
