@@ -9,6 +9,7 @@ const app = express();
 
 app.use(cors())
 
+app.listen(port)
 //ROUTES
 
 //search
@@ -45,7 +46,7 @@ app.get('/download', (request, response) => {
     }).catch(console.error);
 });
 
-app.listen(port)
+
 
 //FUNCTIONS
 function getdetails (link) {
