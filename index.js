@@ -13,6 +13,22 @@ app.listen(port)
 //ROUTES
 
 
+app.get('/search', (request, response) => {
+    console.log(request.query.name);
+    quest(`https://app.pluralsight.com/library/courses/reading-writing-data-ruby/table-of-contents`, (error, _response, html) => {
+        if (!error && _response.statusCode == 200) {
+          const $ = cheerio.load(html);
+          const bookArray = [];
+          $('[target=psplayer]').each((i,el) => {
+            const title = $(el).text()
+            const link = $(el).attr('href');
+         bookArray.push({name:title, link:link})
+          });
+          response.send(bookArray) 
+        }
+      });
+});
+
 // Download
 app.get('/download', (request, response) => {
     console.log(request.query.link);
