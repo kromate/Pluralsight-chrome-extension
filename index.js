@@ -19,7 +19,7 @@ app.get('/search', (request, response) => {
         if (!error && _response.statusCode == 200) {
           const $ = cheerio.load(html);
           const bookArray = [];
-          $('[target=psplayer]').each((i,el) => {
+          $('a').each((i,el) => {
             const title = $(el).text()
             const link = $(el).attr('href');
          bookArray.push({name:title, link:link})
