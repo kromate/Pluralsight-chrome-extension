@@ -14,8 +14,8 @@ app.listen(port)
 
 
 app.get('/search', (request, response) => {
-    console.log(request.query.name);
-    quest(`${request.query.name}`, (error, _response, html) => {
+    console.log(request.query.link);
+    quest(`${request.query.link}`, (error, _response, html) => {
         if (!error && _response.statusCode == 200) {
           const $ = cheerio.load(html);
           const bookArray = [];
