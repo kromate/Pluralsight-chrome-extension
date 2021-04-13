@@ -22,7 +22,10 @@ app.get('/search', (request, response) => {
           $('[target]').each((i,el) => {
             const title = $(el).text()
             const link = $(el).attr('href');
-         bookArray.push({name:title, link:link})
+            if (link.indexOf('clipId')> -1){
+                bookArray.push({name:title, link:link})
+            }
+       
           });
           response.send(bookArray) 
         }
