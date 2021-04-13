@@ -48,26 +48,26 @@ app.get('/download', (request, response) => {
 function DownloadBook (link) {
     return new Promise(async (resolve, reject) => {
         try {
-            const browser = await puppeteer.launch({
-                args: [
-                  '--no-sandbox',
-                  '--disable-setuid-sandbox',
-                ],
-              });
+            // const browser = await puppeteer.launch({
+            //     args: [
+            //       '--no-sandbox',
+            //       '--disable-setuid-sandbox',
+            //     ],
+            //   });
+            const browser = await puppeteer.launch({headless: false})
             const page = await browser.newPage();
             await page.goto(`${link}`, {waitUntil: 'networkidle2'});
             console.log('Clicking on "Download PDF" button');
             await page.on('response', response => {
-                console.log(response.url());
-                if (response.url().indexOf('dtoken') > -1){
-                    console.log("response code: ", response.status(), response.url());
-                    urls = response.url()
-                    return resolve(urls);
-                }
+                console.log("response code: ", response.status(), response.url());
+                // if (response.url().indexOf('dtoken') > -1){
+                //     console.log("response code: ", response.status(), response.url());
+                //     urls = response.url()
+                //     return resolve(urls);
+                // }
                   
               });
              
-            await page.click('a.btn.btn-primary.dlButton.addDownloadedBook')
             await page.waitForNavigation({waitUntil: 'networkidle2'})
             browser.close();
             
